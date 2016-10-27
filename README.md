@@ -14,7 +14,16 @@ To get up and running please follow the following steps
   download and unzip the package at [https://github.com/rjriel/qritter-wars-client/archive/master.zip](https://github.com/rjriel/qritter-wars-client/archive/master.zip)
   
 2. run `npm install` to install dependencies
-3. add a config.json file to the root of the project. It should look like the following:
+3. If you haven't already created a qritter, do so by posting to the API endpoint `http://<server>:<api port>/signup` with a json body like below:
+
+  ```
+  {
+	"name": "<qritter name>"
+  }
+  ```
+  
+  The result will be a json object with the `apiId` and `apiSecret` in the body.
+4. add a config.json file to the root of the project. It should look like the following:
 
   ```
   {
@@ -25,14 +34,5 @@ To get up and running please follow the following steps
     "apiSecret": "<qritter API Secret>"
   }
   ```
-  
-4. If you haven't already created a qritter, do so by posting to the API endpoint `http://<server>:<api port>/signup` with a json body like below:
-
-  ```
-  {
-	"name": "<qritter name>"
-  }
-  ```
-  
-  The result will be a json object with the `apiId` and `apiSecret` in the body.
+ 
 5. run `node index.js`
