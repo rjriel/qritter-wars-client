@@ -37,39 +37,15 @@ socket.on('start game', (game) => {
   // our Qritter has started battling against another Qritter
   console.log('game started')
 
-  // we want to retrieve the game information
-  getGame(game.id)
-      .then((game) => {
-        // we check game.current to see if it is our turn to play.
-        // if so, we perform move
-        if (game.current === playerId) {
-          performMove()
-        }
-      })
-})
-
-socket.on('in game', (game) => {
-  // we were placed into a game prior to being connected to the socket server,
-  // this usually occurs when reconnecting to the socket after being
-  // disconnected
-  console.log('already in game')
-
-  getGame(game.id)
-      .then((game) => {
-        if (game.current === playerId) {
-          console.log('your turn')
-          // we check game.current to see if it is our turn to play.
-          // if so, we perform move
-          performMove()
-        }
-      })
+  if (game.current === playerId) {
+    performMove()
+  }
 })
 
 socket.on('move played', (move) => {
   // someone has played a move in our game
   // if the move just played wasn't by us, it is now
   // our turn to play.
-
   if (move.player != playerId) {
     console.log(`opponent performed ${move.result}`)
     performMove()
